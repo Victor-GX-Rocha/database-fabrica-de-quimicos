@@ -1,0 +1,5 @@
+**/__pycash__/
+.env
+.venv
+.gitinit
+test
