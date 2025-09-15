@@ -2,6 +2,7 @@
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
+from contextlib import contextmanager
 
 from .models import DatabaseConnector 
 
@@ -10,17 +11,30 @@ engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(bind=engine)
 Base = declarative_base()
 
+
+@contextmanager
 def session_scope():
-    """ Creates a temp session. """
+    """ 
+    Creates a temporary session within a scope that can be accessed with a with statement.
+
+    Automatically performs:
+    - Opens the session.
+    - Commits at the end of the operation.
+    - Rollback in case of error.
+    - Closes the temporary session.
+    """
     try:
-        session  = SessionLocal()
+        session = SessionLocal()
         yield session
         session.commit()
-    except Exception as e:
-        print(f"Erro ao realizar comando SQL: {e}")
+    except Exception:
         session.rollback()
+    finally:
+        session.close()
 
 
 def create_tables() -> None:
     """ Creates all defined tables if it not exist. """
-    Base.meatada.create_all(engine)
+    Base.metadata.create_all(engine)
+
+create_tables()
