@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de estoque</title>
+    <!-- <link href="src/gui/style.css" rel="stylesheet"/> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 1;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        /* Variáveis de cor */
+        :root {
+            --primary: #2c3e50;
+            --secondary: #34495e;
+            --accent: #3498db;
+            --light: #ecf0f1;
+        }
+        /*
+        :root {
+            --primary: #2c3e50;
+            --secondary: #34495e;
+            --accent: #3498db;
+            --light: #ecf0f1;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+        }
+        */
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* Menu Lateral */
+        /* Hmmm... Pensando agora depois de ter termiado essa parte, seria interessante adicionar algo para transformar esse menu bar em um "amburguer" caso seja acessado por um mobile */
+        .sidebar {
+            width: 250px;
+            border-radius: 10px;
+            background: var(--primary);
+            color: white;
+            transition: all 0.3s ease; /* Não sei o que essa linha faz */
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar-header {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .sidebar-header h2 {
+            font-size: 1.5rem;
+            margin-top: 10px;
+        }
+        
+        .sidebar-menu {
+            padding: 10px 0;
+        }
+        .menu-category {
+            padding: 15px 20px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.6);
+            letter-spacing: 1px;
+        }
+        .menu-item {
+            padding: 12px 20px;
+            display: flex; /* Não sei o que é isso */
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-left: 4px solid transparent;
+        }
+        
+        .menu-item:hover {
+            background: var(--secondary);
+            border-left: 8px solid var(--accent);
+        }
+        
+        .menu-item.active {
+            background: var(--secondary);
+            border-left: 8px solid var(--accent);
+        }
+        
+        .menu-item i {
+            margin-right: 10px;
+            font-size: 1.1rem;
+        }
+        
+        
+        /* Conteúdo principal */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .topbar {
+            background: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-radius: 10px;
+        }
+        
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: var(--light);
+            border-radius: 20px;
+            padding: 5px 15px;
+            width: 300px;
+        }
+        
+        .search-box input {
+            border: none;
+            background: transparent;
+            padding: 8px;
+            width: 100%;
+            outline: none;
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .user-profile img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+            object-fit: cover;
+        }
+        
+        /* Área de Conteúdo */
+        
+        .content {
+            padding: 30px;
+            flex: 1;
+            overflow-y: auto;
+        }
+        
+        .page {
+            display: none;
+        }
+        
+        .page.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .page-header {
+            margin-bottom: 30px;
+        }
+        
+        .page-header h1 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05); /* Seria bem interessante fazer algo dinâmico aqui. A cor da sombra mudar conforme o estado do produto. Ex.: Produto em alerta, a sombra também ficar vermelha. */
+            transition: transform 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 6px rgba(0,0,0,0.07);
+            cursor: pointer;
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .card-title {
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+        
+        .card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(52, 152, 219, 0.1);
+            color: var(--accent);
+        }
+        
+        .card-icon-warning {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgb(255, 132, 0, 0.1);
+            color: rgb(255, 132, 0);
+        }
+        
+        .card-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--secondary);
+            margin: 10px 0;
+        }
+        
+        .card-desc {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        /*
+
+        */
+    </style>
+</head>
+<body>
+    
+    <!-- Menu lateral -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <i class="fas fa-box"></i>
+            <h2>Controle de estoque</h2>
+        </div>
+        <div class="sidebar-menu">
+            <div class="menu-category">Área Prática</div>
+            <div class="menu-item active" data-page="dashboard"> <!-- data-page="dashboard"> não sei o que é esse "data-page"-->
+                <i class="fas fa-tachometer-alt"></i> <!-- Adicionou um ícone de relógio -->
+                <span>Dashboard</span>
+            </div>
+            <div class="menu-item" data-page="register-product">
+                <i class="fas fa-flask"></i>
+                <span>Registrar Produto</span>
+            </div>
+            <div class="menu-item" data-page="movement">
+                <i class="fas fa-exchange-alt"></i>
+                <span>Movimentação</span>
+            </div>
+            <div class="menu-item" data-page="suppliers">
+                <i class="fas fa-truck"></i>
+                <span>Fornecedores</span>
+            </div>
+            
+            <div class="menu-category">Análise de Dados</div>
+            <div class="menu-item" data-page="reports">
+                <i class="fas fa-chart-bar"></i>
+                <span>Relatórios</span>
+            </div>
+            <div class="menu-item" data-page="analytics">
+                <i class="fas fa-chart-line"></i>
+                <span>Analytic</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Conteúdo principal -->
+    <div class="main-content">
+        <div class="topbar">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Pesquisar...">
+            </div>
+            
+            <div class="user-profile">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiM3ZjlhYjIiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMjAgMjF2LTJhNCA0IDAgMCAwLTQtNEg4YTQgNCAwIDAgMC00IDR2MiI+PC9wYXRoPjxjaXJjbGUgY3g9IjEyIiBjeT0iNyIgcj0iNCI+PC9jaXJjbGU+PC9zdmc+" alt="Usuário">
+                <span>Admin</span>
+            </div>
+        </div>
+        
+        <div class="content">
+            <!-- Página dashboard -->
+            <div id="dashboard" class="page active">
+                <div class="page-header">
+                    <h1>Dashboard Principal</h1>
+                    <p>Visão geral do sistema de produtos químicos</p>
+                </div>
+                
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Total de produtos</h3>
+                            <div class="card-icon">
+                                <i class="fas fa-flask"></i>
+                            </div>
+                        </div>
+                        <div class="card-value">142</div>
+                        <div class="card-desc">+5 na última semana</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Estoque Crítico</h3>
+                            <div class="card-icon-warning">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                        </div>
+                        <div class="card-value">8</div>
+                        <div class="card-desc">Produtos com baixo estoque</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Movimentações</h3>
+                            <div class="card-icon">
+                                <i class="fas fa-exchange-alt"></i>
+                            </div>
+                        </div>
+                        <div class="card-value">24</div>
+                        <div class="card-desc">Este mês</div>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <!-- Página Registrar Produto -->
+            <div id="register-product" class="page">
+                <div class="page-header">
+                    <h1>Registrar Novo Produto</h1>
+                    <p>Cadastre um novo produto químico no sistema</p>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</body>
+</html>

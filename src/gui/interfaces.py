@@ -8,6 +8,8 @@ from .produtos import IProductRegister
 class IMainWindow(QMainWindow):
     def __init__(self) -> None:
         super().__init__()
+        self.resize(290, 50)
+        self.setMinimumSize(290, 50)
         self.setWindowTitle("Banco de dados 🏭")
         self._build_ui()
     
@@ -32,15 +34,3 @@ __all__ = [
     "IMainWindow"
 ]
 
-# # Testes
-# if __name__ == "__main__":
-#     def main():
-#         from PySide6.QtWidgets import QApplication
-#         import sys
-        
-#         app = QApplication(sys.argv)
-#         win = IMainWindow()
-#         win.show()
-#         sys.exit(app.exec())
-    
-#     main()
