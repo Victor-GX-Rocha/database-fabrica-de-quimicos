@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de estoque</title>
+    <!-- <link href="src/gui/style.css" rel="stylesheet"/> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="static/style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Menu lateral -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <i class="fas fa-box"></i>
+            <h2>Controle de estoque</h2>
+        </div>
+        <div class="sidebar-menu">
+            <div class="menu-category">Área Prática</div>
+            <div class="menu-item active" data-page="dashboard"> <!-- data-page="dashboard"> não sei o que é esse "data-page"-->
+                <i class="fas fa-tachometer-alt"></i> <!-- Adicionou um ícone de relógio -->
+                <span>Dashboard</span>
+            </div>
+            <div class="menu-item" data-page="register-product">
+                <i class="fas fa-flask"></i>
+                <span>Registrar Produto</span>
+            </div>
+            <div class="menu-item" data-page="movement">
+                <i class="fas fa-exchange-alt"></i>
+                <span>Movimentação</span>
+            </div>
+            <div class="menu-item" data-page="suppliers">
+                <i class="fas fa-truck"></i>
+                <span>Fornecedores</span>
+            </div>
+            
+            <div class="menu-category">Análise de Dados</div>
+            <div class="menu-item" data-page="reports">
+                <i class="fas fa-chart-bar"></i>
+                <span>Relatórios</span>
+            </div>
+            <div class="menu-item" data-page="analytics">
+                <i class="fas fa-chart-line"></i>
+                <span>Analytic</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Conteúdo principal -->
+    <div class="main-content">
+        <div class="topbar">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Pesquisar...">
+            </div>
+            
+            <div class="user-profile">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiM3ZjlhYjIiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMjAgMjF2LTJhNCA0IDAgMCAwLTQtNEg4YTQgNCAwIDAgMC00IDR2MiI+PC9wYXRoPjxjaXJjbGUgY3g9IjEyIiBjeT0iNyIgcj0iNCI+PC9jaXJjbGU+PC9zdmc+" alt="Usuário">
+                <span>Admin</span>
+            </div>
+        </div>
+        
+        <div class="content">
+            <!-- Página dashboard -->
+            <div id="dashboard" class="page active">
+                <div class="page-header">
+                    <h1>Dashboard Principal</h1>
+                    <p>Visão geral do sistema de produtos químicos</p>
+                </div>
+                
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Total de produtos</h3>
+                            <div class="card-icon">
+                                <i class="fas fa-flask"></i>
+                            </div>
+                        </div>
+                        <div class="card-value">142</div>
+                        <div class="card-desc">+5 na última semana</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Estoque Crítico</h3>
+                            <div class="card-icon-warning">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                        </div>
+                        <div class="card-value">8</div>
+                        <div class="card-desc">Produtos com baixo estoque</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Movimentações</h3>
+                            <div class="card-icon">
+                                <i class="fas fa-exchange-alt"></i>
+                            </div>
+                        </div>
+                        <div class="card-value">24</div>
+                        <div class="card-desc">Este mês</div>
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <h3 class="form-title">Produtos Recentes</h3>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Produto</th>
+                                    <th>Categoria</th>
+                                    <th>Estoque</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Detergente Concentrado</td>
+                                    <td>Limpeza</td>
+                                    <td>45 L</td>
+                                    <td><span style="color: var(--success);">Normal</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Ácido Clorídrico</td>
+                                    <td>Químico</td>
+                                    <td>12 L</td>
+                                    <td><span style="color: var(--warning);">Atenção</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Desinfetante</td>
+                                    <td>Limpeza</td>
+                                    <td>32 L</td>
+                                    <td><span style="color: var(--success);">Normal</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Álcool em Gel</td>
+                                    <td>Higiênico</td>
+                                    <td>8 L</td>
+                                    <td><span style="color: var(--danger);">Crítico</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Página Registrar Produto -->
+            <div id="register-product" class="page">
+                <div class="page-header">
+                    <h1>Registrar Produtos</h1>
+                    <p>Cadastre um ou mais produtos químicos no sistema</p>
+                </div>
+
+                <form action="/cadastrar-produto" method="post">
+                    <div class="form-section">
+                        <!-- Contêiner que vai receber os cards -->
+                        <div id="produtos-container" style="display: grid; gap: 20px;">
+                            <!-- 🔹 Primeiro card inicial já renderizado -->
+                            <div class="produto-form card">
+                                <h3>Produto</h3>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Nome do Produto</label>
+                                        <input type="text" name="product_name[]" placeholder="Ex: Detergente Concentrado" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Categoria</label>
+                                        <select name="product_category[]" required>
+                                            <option value="">Selecione uma categoria</option>
+                                            {% for categoria in categorias %}
+                                                <option value="{{ categoria.id }}">{{ categoria.nome }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Quantidade</label>
+                                        <input type="number" name="product_quantity[]" placeholder="0" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Unidade de Medida</label>
+                                        <select name="product_unit[]" required>
+                                            {% for unidade in unidades %}
+                                                <option value="{{ unidade.id }}">{{ unidade.nome }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Descrição</label>
+                                    <textarea name="product_description[]" rows="3" placeholder="Descrição detalhada do produto"></textarea>
+                                </div>
+
+                                <!-- Botões do card -->
+                                <div class="acoes">
+                                    <button type="button" class="btn btn-primary btnCadastrar" onclick="cadastrarProduto(this)">Cadastrar Produto</button>
+                                    <button type="button" class="btn btn-warning btnEditar" style="display:none;">Editar cadastro</button>
+                                    <button type="button" class="btn btn-danger btnRemover" style="display:none;" onclick="removerProduto(this)">Remover produto</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Botões globais -->
+                    <div style="margin-top:20px;">
+                        <button type="button" class="btn btn-primary" onclick="adicionarProduto()">Adicionar novo produto</button>
+                        <button type="submit" class="btn btn-success">Cadastrar todos os produtos</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- 🔹 Template escondido que serve de modelo -->
+            <template id="produto-template">
+                <div class="produto-form card">
+                    <h3>Produto</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Nome do Produto</label>
+                            <input type="text" name="product_name[]" placeholder="Ex: Detergente Concentrado" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Categoria</label>
+                            <select name="product_category[]" required>
+                                <option value="">Selecione uma categoria</option>
+                                {% for categoria in categorias %}
+                                    <option value="{{ categoria.id }}">{{ categoria.nome }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Quantidade</label>
+                            <input type="number" name="product_quantity[]" placeholder="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Unidade de Medida</label>
+                            <select name="product_unit[]" required>
+                                {% for unidade in unidades %}
+                                    <option value="{{ unidade.id }}">{{ unidade.nome }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Descrição</label>
+                        <textarea name="product_description[]" rows="3" placeholder="Descrição detalhada do produto"></textarea>
+                    </div>
+
+                    <div class="acoes">
+                        <button type="button" class="btn btn-primary btnCadastrar" onclick="cadastrarProduto(this)">Cadastrar Produto</button>
+                        <button type="button" class="btn btn-warning btnEditar" style="display:none;">Editar cadastro</button>
+                        <button type="button" class="btn btn-danger btnRemover" style="display:none;" onclick="removerProduto(this)">Remover produto</button>
+                    </div>
+                </div>
+            </template>
+            
+            
+            <!-- Página Movimentação de estoque -->
+            <div id="movement" class="page">
+                <div class="page-header">
+                    <h1>Movimentação de Estoques</h1>
+                    <p>Registre entradas e saídas do estoque</p>
+                </div>
+            </div>
+            
+            <!-- Página Fornecedores -->
+            <div id="suppliers" class="page">
+                <div class="page-header">
+                    <h1>Fornecedores</h1>
+                    <p>Gerencie os fornecedores de produtos químicos</p>
+                </div>
+            </div>
+            
+            <!-- Página de relatórios -->
+            <div id="reports" class="page">
+                <div class="page-header">
+                    <h1>Relatórios</h1>
+                    <p>Gere relatórios do sistema</p>
+                </div>
+            </div>
+            
+            <!-- Página de análises -->
+            <div id="analytics" class="page">
+                <div class="page-header">
+                    <h1>Análises</h1>
+                    <p>Visualize análises e gráficos dos dados</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Script para alternar entre as páginas
+        document.querySelectorAll(".menu-item").forEach(item => {
+            item.addEventListener('click', function() {
+                // Remove a classe active de todos os itens do menu
+                document.querySelectorAll(".menu-item").forEach(i => {
+                    i.classList.remove('active');
+                });
+                
+                // Adiciona a classe active ao item cliclado
+                this.classList.add("active");
+                
+                // Oculta todas as páginas
+                document.querySelectorAll('.page').forEach(page => {
+                    page.classList.remove('active');
+                });
+                
+                // Mostra a página correspondente
+                const pageId = this.getAttribute('data-page');
+                document.getElementById(pageId).classList.add('active');
+                
+            });
+        });
+        
+        // Clonagem de quadro de adição de produtos.
+        function adicionarProduto() {
+            const container = document.getElementById("produtos-container");
+            const primeiroProduto = container.querySelector(".produto-form");
+            const novoProduto = primeiroProduto.cloneNode(true); // clones the block
+            // cleans the input values
+            novoProduto.querySelectorAll("input, select").forEach(el => el.value = "");
+            container.appendChild(novoProduto);
+        }
+        
+        function produtoCadastrado() {
+            document.getElementById("btnCadastrar").style.display = "none";
+            document.getElementById("btnEditar").style.display = "inline-block";
+            document.getElementById("btnRemover").style.display = "inline-block";
+        }
+        
+        
+        /* 🔹 Adiciona um novo card baseado no template */
+        function adicionarProduto() {
+            const container = document.getElementById("produtos-container");
+            const template = document.getElementById("produto-template");
+            const novoProduto = template.content.cloneNode(true);
+            container.appendChild(novoProduto);
+        }
+
+        /* 🔹 Marca produto como cadastrado (simulação) */
+        function cadastrarProduto(button) {
+            const bloco = button.closest(".produto-form");
+            bloco.querySelector(".btnCadastrar").style.display = "none";
+            bloco.querySelector(".btnEditar").style.display = "inline-block";
+            bloco.querySelector(".btnRemover").style.display = "inline-block";
+        }
+
+        /* 🔹 Remove o card */
+        function removerProduto(button) {
+            const bloco = button.closest(".produto-form");
+            bloco.remove();
+        }
+    </script>
+</body>
+</html>

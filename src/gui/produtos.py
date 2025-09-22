@@ -17,7 +17,7 @@ from src.db.repo.models import (
 class IProductRegister(QDialog):
     def __init__(self, parent=None) -> None:
         self.repo = ProdutoRepository()
-        self.coluns: list[str] = ["Nome", "Quantidade inicial", "Categoria", "Tags"]
+        self.coluns: list[str] = ["Nome", "Quantidade inicial", "Categoria", "lote_id", "Tags"]
         
         super().__init__(parent)
         # self.resize(450, 300)

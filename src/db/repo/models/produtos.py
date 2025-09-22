@@ -51,6 +51,7 @@ class ProdutoORM(Base):
     # sku: Mapped[str] = mapped_column(String(32), unique=True, index=True)
     quantidade_atual: Mapped[int] = mapped_column(Integer, default=0)
     categoria: Mapped[Optional[str]] = mapped_column(String(64))
+    lote_id: Mapped[str] = mapped_column(String(256), nullable=False)
     tags: Mapped[Optional[str]] = mapped_column(String(256))
     
     movimentacoes: Mapped[list["ProdutoMovORM"]] = relationship(

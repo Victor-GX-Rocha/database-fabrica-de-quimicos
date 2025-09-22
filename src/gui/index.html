@@ -20,18 +20,10 @@
             --secondary: #34495e;
             --accent: #3498db;
             --light: #ecf0f1;
-        }
-        /*
-        :root {
-            --primary: #2c3e50;
-            --secondary: #34495e;
-            --accent: #3498db;
-            --light: #ecf0f1;
             --success: #2ecc71;
             --warning: #f39c12;
             --danger: #e74c3c;
         }
-        */
         
         body {
             background-color: #f5f7fa;
@@ -146,7 +138,6 @@
         }
         
         /* Área de Conteúdo */
-        
         .content {
             padding: 30px;
             flex: 1;
@@ -195,7 +186,7 @@
         
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 6px 6px rgba(0,0,0,0.07);
+            box-shadow: 0 6px 6px rgba(0,0,0,0.1);
             cursor: pointer;
         }
         
@@ -245,9 +236,152 @@
             font-size: 0.9rem;
         }
         
-        /*
-
-        */
+        /* Formulários */
+        .form-section {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+        
+        .form-title {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--secondary);
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--accent);
+            outline: none;
+        }
+        
+        /* Botões */
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background-color: var(--accent);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #2980b9;
+        }
+        
+        /* Tabelas */
+        .table-responsive {
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: var(--light);
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        th:hover {
+            background-color: rgba(236, 240, 241, 0.5);
+        }
+        
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 80px;
+            }
+            
+            .sidebar-header h2, .menu-item span, .menu-category {
+                display: none;
+            }
+            
+            .menu-item {
+                justify-content: center;
+            }
+            
+            .menu-item i {
+                margin-right: 0;
+                font-size: 1.3rem;
+            }
+            
+            .search-box {
+                width: 200px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+            }
+            
+            .sidebar-menu {
+                display: flex;
+                overflow-x: auto;
+            }
+            
+            .menu-category {
+                display: none;
+            }
+            
+            .menu-item {
+                padding: 15px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -346,6 +480,47 @@
                     </div>
                 </div>
                 
+                <div class="form-section">
+                    <h3 class="form-title">Produtos Recentes</h3>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Produto</th>
+                                    <th>Categoria</th>
+                                    <th>Estoque</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Detergente Concentrado</td>
+                                    <td>Limpeza</td>
+                                    <td>45 L</td>
+                                    <td><span style="color: var(--success);">Normal</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Ácido Clorídrico</td>
+                                    <td>Químico</td>
+                                    <td>12 L</td>
+                                    <td><span style="color: var(--warning);">Atenção</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Desinfetante</td>
+                                    <td>Limpeza</td>
+                                    <td>32 L</td>
+                                    <td><span style="color: var(--success);">Normal</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Álcool em Gel</td>
+                                    <td>Higiênico</td>
+                                    <td>8 L</td>
+                                    <td><span style="color: var(--danger);">Crítico</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
             
             <!-- Página Registrar Produto -->
@@ -354,9 +529,108 @@
                     <h1>Registrar Novo Produto</h1>
                     <p>Cadastre um novo produto químico no sistema</p>
                 </div>
-                
+
+                <div class="form-section">
+                    <h3 class="form-title">Informações do Produto</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="product-name">Nome do Produto</label>
+                            <input type="text" id="product-name" placeholder="Ex: Detergente Concentrado">
+                        </div>
+                        <div class="form-group">
+                            <label for="product-category">Categoria</label>
+                            <select id="product-category">
+                                <option value="">Selecione uma categoria</option>
+                                <option value="cleaner">Limpeza</option>
+                                <option value="chemical">Químico</option>
+                                <option value="hygienic">Higiênico</option>
+                                <option value="sanitizer">Sanitizante</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="product-quantity">Quantidade</label>
+                            <input type="number" id="product-quantity" placeholder="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="product-unit">Unidade de Medida</label>
+                            <select id="product-unit">
+                                <option value="L">Litro (L)</option>
+                                <option value="ml">Mililitro (ml)</option>
+                                <option value="kg">Quilograma (kg)</option>
+                                <option value="g">Grama (g)</option>
+                                <option value="un">Unidade</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="product-description">Descrição</label>
+                        <textarea id="product-description" rows="3" placeholder="Descrição detalhada do produto"></textarea>
+                    </div>
+
+                    <button class="btn btn-primary">Cadastrar Produto</button>
+                </div>
+            </div>
+            
+            <!-- Página Movimentação de estoque -->
+            <div id="movement" class="page">
+                <div class="page-header">
+                    <h1>Movimentação de Estoques</h1>
+                    <p>Registre entradas e saídas do estoque</p>
+                </div>
+            </div>
+            
+            <!-- Página Fornecedores -->
+            <div id="suppliers" class="page">
+                <div class="page-header">
+                    <h1>Fornecedores</h1>
+                    <p>Gerencie os fornecedores de produtos químicos</p>
+                </div>
+            </div>
+            
+            <!-- Página de relatórios -->
+            <div id="reports" class="page">
+                <div class="page-header">
+                    <h1>Relatórios</h1>
+                    <p>Gere relatórios do sistema</p>
+                </div>
+            </div>
+            
+            <!-- Página de análises -->
+            <div id="analytics" class="page">
+                <div class="page-header">
+                    <h1>Análises</h1>
+                    <p>Visualize análises e gráficos dos dados</p>
+                </div>
             </div>
         </div>
     </div>
+    <script>
+        // Script para alternar entre as páginas
+        document.querySelectorAll(".menu-item").forEach(item => {
+            item.addEventListener('click', function() {
+                // Remove a classe active de todos os itens do menu
+                document.querySelectorAll(".menu-item").forEach(i => {
+                    i.classList.remove('active');
+                });
+                
+                // Adiciona a classe active ao item cliclado
+                this.classList.add("active");
+                
+                // Oculta todas as páginas
+                document.querySelectorAll('.page').forEach(page => {
+                    page.classList.remove('active');
+                });
+                
+                // Mostra a página correspondente
+                const pageId = this.getAttribute('data-page');
+                document.getElementById(pageId).classList.add('active');
+                
+            });
+        });
+    </script>
 </body>
 </html>
