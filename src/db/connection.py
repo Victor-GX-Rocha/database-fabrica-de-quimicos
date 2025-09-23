@@ -38,3 +38,9 @@ def create_tables() -> None:
     Base.metadata.create_all(engine)
 
 create_tables()
+
+__all__ = [
+    "Base",
+    "session_scope",
+    "create_tables",
+]
