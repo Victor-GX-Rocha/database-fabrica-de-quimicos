@@ -1,5 +1,5 @@
-**/__pycash__/
+**/__pycache__/
 /test
 .env
 .venv
-.gitinit
+.gitignore
