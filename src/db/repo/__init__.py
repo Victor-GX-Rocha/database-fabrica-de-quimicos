@@ -1,9 +1,9 @@
 """ Repositories for tables. """
 
-from .produtos import ProdutoRepository
+# from .produtos import ProdutoRepository
 
 __version__ = "v.0.0.1"
 __all__ = [
     "__version__",
-    "ProdutoRepository"
+    # "ProdutoRepository"
 ]

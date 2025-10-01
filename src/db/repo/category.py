@@ -3,13 +3,13 @@
 from typing import Generic, TypeVar, Iterable
 from src.db.connection import session_scope
 from .models import (
-    CategoriaBaseDTO, EPICategoriaDTO, InsumoCategoriaDTO, ProdutoCategoriaDTO,
-    CategoriaBaseORM, EPICategoriaORM, InsumoCategoriaORM, ProdutoCategoriaORM
+    CategoryBaseDTO, CategoryEPIDTO, CategoryInputDTO, CategoryProductDTO,
+    CategoryBaseORM, CategoryEPIORM, CategoryInputORM, CategoryProductORM
 )
 
 
-CategoriaORMType = TypeVar("CategoriaORMType", bound="CategoriaBaseDTO")
-CategoriaDTOType = TypeVar("CategoriaDTOType", bound="CategoriaBaseORM")
+CategoriaORMType = TypeVar("CategoriaORMType", bound="CategoryBaseDTO")
+CategoriaDTOType = TypeVar("CategoriaDTOType", bound="CategoryBaseORM")
 
 class CategoryRepositoryBase(Generic[CategoriaORMType, CategoriaDTOType]):
     """ Base repository for category tables with shared structure. """
@@ -32,14 +32,14 @@ class CategoryRepositoryBase(Generic[CategoriaORMType, CategoriaDTOType]):
                 comentario=dto.comment
             ) for dto in dtos])
 
-class CategoryEPIRepository(CategoryRepositoryBase[EPICategoriaDTO, EPICategoriaORM]):
+class CategoryEPIRepository(CategoryRepositoryBase[CategoryEPIDTO, CategoryEPIORM]):
     def __init__(self) -> None:
-        super().__init__(EPICategoriaORM)
+        super().__init__(CategoryEPIORM)
 
-class CategoryInsumoRepository(CategoryRepositoryBase[InsumoCategoriaDTO, InsumoCategoriaORM]):
+class CategoryInsumoRepository(CategoryRepositoryBase[CategoryInputDTO, CategoryInputORM]):
     def __init__(self) -> None:
-        super().__init__(InsumoCategoriaORM)
+        super().__init__(CategoryInputORM)
 
-class CategoryProdutoRepository(CategoryRepositoryBase[ProdutoCategoriaDTO, ProdutoCategoriaORM]):
+class CategoryProdutoRepository(CategoryRepositoryBase[CategoryProductDTO, CategoryProductORM]):
     def __init__(self) -> None:
-        super().__init__(ProdutoCategoriaORM)
+        super().__init__(CategoryProductORM)

@@ -1,22 +1,23 @@
 """ Manages the connection with the database. """
 
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, declarative_base
+from sqlalchemy.orm import sessionmaker, declarative_base, DeclarativeBase
 from contextlib import contextmanager
 
 from .models import DatabaseConnector 
 
 DATABASE_URL: str = DatabaseConnector().url
-engine = create_engine(DATABASE_URL)
+engine = create_engine(DATABASE_URL, echo=True)
 SessionLocal = sessionmaker(bind=engine)
-Base = declarative_base()
 
+class Base(DeclarativeBase):
+    pass
 
 @contextmanager
 def session_scope():
     """ 
     Creates a temporary session within a scope that can be accessed with a with statement.
-
+    
     Automatically performs:
     - Opens the session.
     - Commits at the end of the operation.

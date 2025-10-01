@@ -11,27 +11,27 @@ from .exceptions import AttributesMissingError
 @dataclass
 class RegistryBaseDTO:
     id: Optional[int] = None
-    name: str
-    current_quantity: int
+    name: str = None
+    current_quantity: int = None
 
 @dataclass
 class RegistryEPIDTO(RegistryBaseDTO):
-    ca_number: str
-    id_batch: str
-    type: EPITypes
-    category: str
-    validity: date
+    ca_number: str = None
+    id_batch: str = None
+    type: EPITypes = None
+    category: str = None
+    validity: date = None
 
 @dataclass
 class RegistryInputDTO(RegistryBaseDTO):
-    measure_unit: UnitTypes
-    category: str
+    measure_unit: UnitTypes = None
+    category: str = None
 
 @dataclass
 class RegistryProductDTO(RegistryBaseDTO):
-    id_formula: int
-    category: str
-    tag: str
+    id_formula: int = None
+    category: str = None
+    tag: str = None
 
 @dataclass
 class SuppliersIdentifersDTO:

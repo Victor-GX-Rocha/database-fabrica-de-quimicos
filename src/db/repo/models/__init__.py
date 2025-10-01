@@ -4,8 +4,8 @@ from src.db.connection import create_tables
 
 from .base import MovementType
 from .category import (
-    CategoriaBaseDTO, EPICategoriaDTO, InsumoCategoriaDTO, ProdutoCategoriaDTO,
-    CategoriaBaseORM, EPICategoriaORM, InsumoCategoriaORM, ProdutoCategoriaORM
+    CategoryBaseDTO, CategoryEPIDTO, CategoryInputDTO, CategoryProductDTO,
+    CategoryBaseORM, CategoryEPIORM, CategoryInputORM, CategoryProductORM
 )
 from .registry import (
     BaseRegistryORM, RegistryEPIORM, RegistryInputORM, RegistryProductORM, RegistrySuplierORM,
@@ -21,10 +21,10 @@ __all__ = [
     
     "MovementType",
     
-    "CategoriaBaseDTO", "EPICategoriaDTO", "InsumoCategoriaDTO", "ProdutoCategoriaDTO",
-    "CategoriaBaseORM", "EPICategoriaORM", "InsumoCategoriaORM", "ProdutoCategoriaORM"
+    "CategoryBaseDTO", "CategoryEPIDTO", "CategoryInputDTO", "CategoryProductDTO",
+    "CategoryBaseORM", "CategoryEPIORM", "CategoryInputORM", "CategoryProductORM",
     
     "BaseRegistryORM", "RegistryEPIORM", "RegistryInputORM", "RegistryProductORM", "RegistrySuplierORM",
-    "RegistryBaseDTO", "RegistryEPIDTO", "RegistryInputDTO",  "RegistryProductDTO", 
-    "SuppliersIdentifersDTO", "SuppliersContactsDTO", "RegistrySuplierDTO",
+    "RegistryBaseDTO", "RegistryEPIDTO", "RegistryInputDTO", "RegistryProductDTO", "RegistrySuplierDTO",
+    "SuppliersIdentifersDTO", "SuppliersContactsDTO"
 ]
