@@ -11,7 +11,7 @@ from src.db.connection import Base
 if TYPE_CHECKING:
     from src.db.repo.models import CategoryEPIORM, CategoryInputORM, CategoryProductORM
 # from src.db.repo.models import CategoryEPIORM, CategoryInputORM, CategoryProductORM
-from src.db.repo.models.formula import Formule
+from src.db.repo.models.formule import FormuleORM
 from .types_models import EPITypes, UnitTypes
 from .dto_models import (
     RegistryEPIDTO,
@@ -43,7 +43,7 @@ class RegistryEPIORM(BaseRegistryORM):
     id_lote: Mapped[str] = mapped_column(String(16), index=True)
     tipo: Mapped[EPITypes] = mapped_column(Enum(EPITypes))
     categoria_id: Mapped[int] = mapped_column(Integer, ForeignKey("categoria_epi.id"), nullable=False)
-    validade: Mapped[date] = mapped_column(Date, index=True)
+    # validade: Mapped[date] = mapped_column(Date, index=True)
     
     categoria_orm: Mapped["CategoryEPIORM"] = relationship(
         "CategoryEPIORM",
@@ -59,8 +59,8 @@ class RegistryEPIORM(BaseRegistryORM):
             ca_number=self.ca_numero,
             id_batch=self.id_lote,
             type=self.tipo,
-            category=self.categoria_id,
-            validity=self.validade
+            id_category=self.categoria_id
+            # validity=self.validade
         )
 
 @dataclass
@@ -82,7 +82,7 @@ class RegistryInputORM(BaseRegistryORM):
             name=self.nome,
             current_quantity=self.quantidade_atual,
             measure_unit=self.unidade_medida,
-            category=self.categoria_id
+            id_category=self.categoria_id
         )
 
 @dataclass
@@ -93,9 +93,9 @@ class RegistryProductORM(BaseRegistryORM):
     categoria_id: Mapped[int] = mapped_column(Integer, ForeignKey("categoria_produto.id"), nullable=False) 
     tag: Mapped[str] = mapped_column(Text)
     
-    formula_orm: Mapped["Formule"] = relationship(
-        "Formule",
-        back_populates="formula_orm",
+    formula_orm: Mapped["FormuleORM"] = relationship(
+        "FormuleORM",
+        back_populates="produto_registro",
         lazy="joined"
     )
     
@@ -111,7 +111,7 @@ class RegistryProductORM(BaseRegistryORM):
             name=self.nome,
             current_quantity=self.quantidade_atual,
             id_formula=self.id_formula,
-            category=self.categoria_id,
+            id_category=self.categoria_id,
             tag=self.tag
         )
 

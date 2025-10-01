@@ -3,6 +3,7 @@
 from src.db.connection import create_tables
 
 from .base import MovementType
+from .formule import FormuleORM, FormuleDTO
 from .category import (
     CategoryBaseDTO, CategoryEPIDTO, CategoryInputDTO, CategoryProductDTO,
     CategoryBaseORM, CategoryEPIORM, CategoryInputORM, CategoryProductORM
@@ -10,7 +11,8 @@ from .category import (
 from .registry import (
     BaseRegistryORM, RegistryEPIORM, RegistryInputORM, RegistryProductORM, RegistrySuplierORM,
     RegistryBaseDTO, RegistryEPIDTO, RegistryInputDTO,  RegistryProductDTO, RegistrySuplierDTO,
-    SuppliersIdentifersDTO, SuppliersContactsDTO
+    SuppliersIdentifersDTO, SuppliersContactsDTO,
+    EPITypes, UnitTypes
 )
 
 create_tables()
@@ -21,10 +23,13 @@ __all__ = [
     
     "MovementType",
     
+    "FormuleORM", "FormuleDTO",
+    
     "CategoryBaseDTO", "CategoryEPIDTO", "CategoryInputDTO", "CategoryProductDTO",
     "CategoryBaseORM", "CategoryEPIORM", "CategoryInputORM", "CategoryProductORM",
     
     "BaseRegistryORM", "RegistryEPIORM", "RegistryInputORM", "RegistryProductORM", "RegistrySuplierORM",
     "RegistryBaseDTO", "RegistryEPIDTO", "RegistryInputDTO", "RegistryProductDTO", "RegistrySuplierDTO",
-    "SuppliersIdentifersDTO", "SuppliersContactsDTO"
+    "SuppliersIdentifersDTO", "SuppliersContactsDTO",
+    "EPITypes", "UnitTypes"
 ]

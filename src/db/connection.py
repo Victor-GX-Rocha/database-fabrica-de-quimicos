@@ -28,7 +28,8 @@ def session_scope():
         session = SessionLocal()
         yield session
         session.commit()
-    except Exception:
+    except Exception as e:
+        print("Erro de sessão:", e)
         session.rollback()
     finally:
         session.close()

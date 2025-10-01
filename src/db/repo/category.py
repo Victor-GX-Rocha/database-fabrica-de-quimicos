@@ -32,14 +32,20 @@ class CategoryRepositoryBase(Generic[CategoriaORMType, CategoriaDTOType]):
                 comentario=dto.comment
             ) for dto in dtos])
 
-class CategoryEPIRepository(CategoryRepositoryBase[CategoryEPIDTO, CategoryEPIORM]):
+class CategoryEPIRepository(CategoryRepositoryBase):
     def __init__(self) -> None:
         super().__init__(CategoryEPIORM)
 
-class CategoryInsumoRepository(CategoryRepositoryBase[CategoryInputDTO, CategoryInputORM]):
+class CategoryInputRepository(CategoryRepositoryBase[CategoryInputDTO, CategoryInputORM]):
     def __init__(self) -> None:
         super().__init__(CategoryInputORM)
 
-class CategoryProdutoRepository(CategoryRepositoryBase[CategoryProductDTO, CategoryProductORM]):
+class CategoryProductRepository(CategoryRepositoryBase[CategoryProductDTO, CategoryProductORM]):
     def __init__(self) -> None:
         super().__init__(CategoryProductORM)
+
+__all__ = [
+    "CategoryEPIRepository",
+    "CategoryInputRepository",
+    "CategoryProductRepository"
+]

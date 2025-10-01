@@ -60,7 +60,7 @@ class CategoryInputORM(CategoryBaseORM):
     __tablename__ = "categoria_insumo"
     __DTO__ = CategoryInputDTO
     registro: Mapped[List["RegistryInputORM"]] = relationship(
-        "ProdutoMovORM",
+        "RegistryInputORM",
         back_populates="categoria_orm",
         lazy="selectin"
     )
@@ -70,7 +70,7 @@ class CategoryProductORM(CategoryBaseORM):
     __tablename__ = "categoria_produto"
     __DTO__ = CategoryProductDTO
     registro: Mapped[List["RegistryProductORM"]] = relationship(
-        "ProdutoMovORM",
+        "RegistryProductORM",
         back_populates="categoria_orm",
         lazy="selectin"
     )

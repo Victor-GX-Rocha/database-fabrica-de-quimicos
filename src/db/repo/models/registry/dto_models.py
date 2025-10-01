@@ -19,18 +19,18 @@ class RegistryEPIDTO(RegistryBaseDTO):
     ca_number: str = None
     id_batch: str = None
     type: EPITypes = None
-    category: str = None
-    validity: date = None
+    id_category: int = None
+    # validity: date = None
 
 @dataclass
 class RegistryInputDTO(RegistryBaseDTO):
     measure_unit: UnitTypes = None
-    category: str = None
+    id_category: int = None
 
 @dataclass
 class RegistryProductDTO(RegistryBaseDTO):
     id_formula: int = None
-    category: str = None
+    id_category: int = None
     tag: str = None
 
 @dataclass
@@ -56,14 +56,14 @@ class SuppliersContactsDTO:
         self._has_contact()
     
     def _has_contact(self) -> None:
-        if not any((self.numero, self.email, self.outros_contatos)):
+        if not any((self.number, self.email, self.another_contact)):
             raise AttributesMissingError("At least one of the contact ways must be informed.")
 
 @dataclass
 class RegistrySuplierDTO:
-    id: Optional[int]
-    identfiers: SuppliersIdentifersDTO
-    contact: SuppliersContactsDTO
+    id: Optional[int] = None
+    identfiers: SuppliersIdentifersDTO = None
+    contact: SuppliersContactsDTO = None
 
 
 __all__ = [
