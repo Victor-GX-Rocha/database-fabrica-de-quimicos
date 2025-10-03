@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de estoque</title>
+    <!-- <link href="src/gui/style.css" rel="stylesheet"/> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Menu lateral -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <i class="fas fa-box"></i>
+            <h2>Controle de estoque</h2>
+        </div>
+        <div class="sidebar-menu">
+            <div class="menu-category">Área Prática</div>
+            <div class="menu-item active" data-page="dashboard"> <!-- data-page="dashboard"> não sei o que é esse "data-page"-->
+                <i class="fas fa-tachometer-alt"></i> <!-- Adicionou um ícone de relógio -->
+                <span>Dashboard</span>
+            </div>
+            <div class="menu-item" data-page="register-product">
+                <i class="fas fa-flask"></i>
+                <span>Registrar Produto</span>
+            </div>
+            <div class="menu-item" data-page="movement">
+                <i class="fas fa-exchange-alt"></i>
+                <span>Movimentação</span>
+            </div>
+            <div class="menu-item" data-page="suppliers">
+                <i class="fas fa-truck"></i>
+                <span>Fornecedores</span>
+            </div>
+            
+            <div class="menu-category">Análise de Dados</div>
+            <div class="menu-item" data-page="reports">
+                <i class="fas fa-chart-bar"></i>
+                <span>Relatórios</span>
+            </div>
+            <div class="menu-item" data-page="analytics">
+                <i class="fas fa-chart-line"></i>
+                <span>Analytic</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Conteúdo principal -->
+    <div class="main-content">
+        <div class="topbar">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Pesquisar...">
+            </div>
+            
+            <div class="user-profile">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiM3ZjlhYjIiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMjAgMjF2LTJhNCA0IDAgMCAwLTQtNEg4YTQgNCAwIDAgMC00IDR2MiI+PC9wYXRoPjxjaXJjbGUgY3g9IjEyIiBjeT0iNyIgcj0iNCI+PC9jaXJjbGU+PC9zdmc+" alt="Usuário">
+                <span>Admin</span>
+            </div>
+        </div>
+        
+        <!-- Área de conteúdo dinâmico -->
+        <div class="content">
+            <!-- O conteúdo das páginas será carregado aqui via JavaScript -->
+            <div class="loading">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Carregando...</p>
+            </div>
+        </div>
+
+    </div>
+    
+    <!-- Scripts -->
+    <script src="src/gui/js/app.js"></script>
+    <script src="src/gui/js/pages.js"></script>
+    <script src="src/gui/js/product-form.js"></script>
+</body>
+</html>

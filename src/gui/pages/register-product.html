@@ -1,0 +1,126 @@
+<div id="register-product" class="page active">
+    <div class="page-header">
+        <h1>Registrar Produtos</h1>
+        <p>Cadastre um ou mais produtos químicos no sistema</p>
+    </div>
+
+    <form id="form-produtos" action="/cadastrar-produto" method="post">
+        <div class="form-section">
+            <div id="produtos-container" style="display: grid; gap: 20px;">
+                <!-- Primeiro produto -->
+                <div class="produto-form card">
+                    <h3>Produto</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Nome do Produto</label>
+                            <input type="text" name="product_name[]" placeholder="Ex: Detergente Concentrado" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Categoria</label>
+                            <select name="product_category[]" required>
+                                <option value="">Selecione uma categoria</option>
+                                <option value="1">Limpeza</option>
+                                <option value="2">Químico</option>
+                                <option value="3">Higiênico</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Quantidade</label>
+                            <input type="number" name="product_quantity[]" placeholder="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Unidade de Medida</label>
+                            <select name="product_unit[]" required>
+                                <option value="1">Litros (L)</option>
+                                <option value="2">Kilogramas (kg)</option>
+                                <option value="3">Unidades</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Descrição</label>
+                        <textarea name="product_description[]" rows="3" placeholder="Descrição detalhada do produto"></textarea>
+                    </div>
+
+                    <div class="acoes">
+                        <button type="button" class="btn btn-primary btn-cadastrar-produto">
+                            Cadastrar Produto
+                        </button>
+                        <button type="button" class="btn btn-warning btn-editar-produto" style="display:none;">
+                            Editar cadastro
+                        </button>
+                        <button type="button" class="btn btn-danger btn-remover-produto" style="display:none;">
+                            Remover produto
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top:20px;">
+            <button type="button" class="btn btn-primary btn-adicionar-produto">
+                Adicionar novo produto
+            </button>
+            <button type="submit" class="btn btn-success">
+                Cadastrar todos os produtos
+            </button>
+        </div>
+    </form>
+</div>
+
+<template id="produto-template">
+    <div class="produto-form card">
+        <h3>Produto</h3>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Nome do Produto</label>
+                <input type="text" name="product_name[]" placeholder="Ex: Detergente Concentrado" required>
+            </div>
+            <div class="form-group">
+                <label>Categoria</label>
+                <select name="product_category[]" required>
+                    <option value="">Selecione uma categoria</option>
+                    <option value="1">Limpeza</option>
+                    <option value="2">Químico</option>
+                    <option value="3">Higiênico</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Quantidade</label>
+                <input type="number" name="product_quantity[]" placeholder="0" required>
+            </div>
+            <div class="form-group">
+                <label>Unidade de Medida</label>
+                <select name="product_unit[]" required>
+                    <option value="1">Litros (L)</option>
+                    <option value="2">Kilogramas (kg)</option>
+                    <option value="3">Unidades</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Descrição</label>
+            <textarea name="product_description[]" rows="3" placeholder="Descrição detalhada do produto"></textarea>
+        </div>
+
+        <div class="acoes">
+            <button type="button" class="btn btn-primary btn-cadastrar-produto">
+                Cadastrar Produto
+            </button>
+            <button type="button" class="btn btn-warning btn-editar-produto" style="display:none;">
+                Editar cadastro
+            </button>
+            <button type="button" class="btn btn-danger btn-remover-produto" style="display:none;">
+                Remover produto
+            </button>
+        </div>
+    </div>
+</template>
