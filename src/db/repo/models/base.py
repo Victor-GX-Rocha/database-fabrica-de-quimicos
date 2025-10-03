@@ -8,6 +8,17 @@ class MovementType(enum.Enum):
     INBOUND = "entrada"
     OUTBOUND = "saida"
 
+class PackagingTypes(enum.Enum):
+    BOX: str = "Caixa"
+    Fitage: str = "Fitagem"
+
+class SpecificationTypes(enum.Enum):
+    POWDER: str = "Pó"
+    LIQUID: str = "Líquido"
+    GRANULAR: str = "Granulado"
+
 __all__ = [
-    "MovementType"
+    "MovementType",
+    "PackagingTypes",
+    "SpecificationTypes"
 ]

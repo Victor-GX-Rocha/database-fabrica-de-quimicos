@@ -1,7 +1,7 @@
 """ ORM models for registry tables. """
 
 from __future__ import annotations
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, List
 from datetime import date
 from dataclasses import dataclass
 from sqlalchemy import Integer, String, Text, ForeignKey, Enum, Date
@@ -10,17 +10,13 @@ from sqlalchemy.orm import Mapped, mapped_column, composite, MappedAsDataclass, 
 from src.db.connection import Base
 if TYPE_CHECKING:
     from src.db.repo.models import CategoryEPIORM, CategoryInputORM, CategoryProductORM
-# from src.db.repo.models import CategoryEPIORM, CategoryInputORM, CategoryProductORM
+    from src.db.repo.models.movement import MovInputORM, MovProductORM, MovEPIORM
+
 from src.db.repo.models.formule import FormuleORM
 from .types_models import EPITypes, UnitTypes
 from .dto_models import (
-    RegistryEPIDTO,
-    RegistryInputDTO, 
-    RegistryProductDTO,
-    
-    SuppliersIdentifersDTO,
-    SuppliersContactsDTO,
-    RegistrySuplierDTO
+    RegistryEPIDTO, RegistryInputDTO, RegistryProductDTO,
+    SuppliersIdentifersDTO, SuppliersContactsDTO, RegistrySuplierDTO
 )
 
 
@@ -51,6 +47,12 @@ class RegistryEPIORM(BaseRegistryORM):
         lazy="joined"
     )
     
+    movimentacoes_epi: Mapped[List["MovEPIORM"]] = relationship(
+        "MovEPIORM",
+        back_populates="registro_epi",
+        lazy="selectin"
+    )
+    
     def to_dto(self) -> RegistryEPIDTO:
         return RegistryEPIDTO(
             id=self.id,
@@ -76,6 +78,12 @@ class RegistryInputORM(BaseRegistryORM):
         lazy="joined"
     )
     
+    movimentacoes_insumos: Mapped[List["MovInputORM"]] = relationship(
+        "MovInputORM",
+        back_populates="registro_insumo",
+        lazy="selectin"
+    )
+    
     def to_dto(self) -> RegistryInputDTO:
         return RegistryInputDTO(
             id=self.id,
@@ -84,7 +92,14 @@ class RegistryInputORM(BaseRegistryORM):
             measure_unit=self.unidade_medida,
             id_category=self.categoria_id
         )
-
+"""
+movimentacoes_insumos: Mapped[List["MovInputORM"]] = relationship(
+    back_populates="registro_fornecedor"
+)
+movimentacoes_insumos: Mapped[List["MovInputORM"]] = relationship(
+    back_populates="registro_fornecedor"
+)
+"""
 @dataclass
 class RegistryProductORM(BaseRegistryORM):
     __tablename__ = "registro_produtos"
@@ -103,6 +118,12 @@ class RegistryProductORM(BaseRegistryORM):
         "CategoryProductORM",
         back_populates="registro",
         lazy="joined"
+    )
+    
+    movimentacoes_produto: Mapped[List["MovProductORM"]] = relationship(
+        "MovProductORM",
+        back_populates="registro_produto",
+        lazy="selectin"
     )
     
     def to_dto(self) -> RegistryProductDTO:
@@ -137,6 +158,11 @@ class RegistrySuplierORM(Base):
         "numero", "email", "outros_contatos"
     )
     
+    movimentacoes_insumos: Mapped[List["MovInputORM"]] = relationship(
+        "MovInputORM",
+        back_populates="registro_fornecedor",
+        lazy="selectin"
+    )
     
     def to_dto(self) -> RegistrySuplierDTO:
         return RegistrySuplierDTO(
