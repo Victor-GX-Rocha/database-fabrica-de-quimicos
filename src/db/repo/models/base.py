@@ -2,7 +2,6 @@
 
 import enum
 
-
 class MovementType(enum.Enum):
     """ Defines the moviment types. """
     INBOUND = "entrada"
@@ -10,7 +9,7 @@ class MovementType(enum.Enum):
 
 class PackagingTypes(enum.Enum):
     BOX: str = "Caixa"
-    Fitage: str = "Fitagem"
+    FITAGE: str = "Fitagem"
 
 class SpecificationTypes(enum.Enum):
     POWDER: str = "Pó"

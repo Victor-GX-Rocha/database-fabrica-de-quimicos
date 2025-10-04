@@ -137,7 +137,7 @@ class MovProductORM(Base):
     id_produto: Mapped[int] = mapped_column(Integer, ForeignKey("registro_produtos.id"))
     tipo_movimentacao: Mapped[MovementType] = mapped_column(Enum(MovementType), nullable=False)
     litragem: Mapped[float] = mapped_column(Numeric(10, 2), nullable=False, index=True) 
-    tipo_embalagem: Mapped[PackagingTypes] = mapped_column(Enum(PackagingTypes))
+    tipo_embalagem: Mapped[PackagingTypes] = mapped_column(Enum(PackagingTypes), nullable=False)
     empilhagem_maxima: Mapped[int] = mapped_column(Integer, nullable=False)
     sobra: Mapped[float] = mapped_column(Numeric(10, 2))
     validade: Mapped[date] = mapped_column(Date)
